@@ -1,0 +1,14 @@
+-- Core DAX measures for the Power BI version of this portfolio project
+Total Units = SUM(fact_operations[units_processed])
+Target Units = SUM(fact_operations[target_units])
+Target Attainment % = DIVIDE([Total Units], [Target Units])
+Total Defects = SUM(fact_operations[defects])
+Defect Rate % = DIVIDE([Total Defects], [Total Units])
+On-Time Rate % = AVERAGE(fact_operations[on_time_flag])
+Total Downtime (Minutes) = SUM(fact_operations[downtime_minutes])
+Revenue = SUM(fact_operations[revenue_gbp])
+Cost = SUM(fact_operations[cost_gbp])
+Gross Margin = [Revenue] - [Cost]
+Gross Margin % = DIVIDE([Gross Margin], [Revenue])
+Units Previous Month = CALCULATE([Total Units], DATEADD(dim_date[date], -1, MONTH))
+Units MoM % = DIVIDE([Total Units] - [Units Previous Month], [Units Previous Month])
